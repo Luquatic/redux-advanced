@@ -1,4 +1,4 @@
-import {TOGGLE, ToggleAction} from './types';
+import {SHOW_NOTIFICATION, ShowNotificationAction, TOGGLE, ToggleAction} from './types';
 
 const toggle = (): ToggleAction => {
     return {
@@ -6,10 +6,18 @@ const toggle = (): ToggleAction => {
     }
 }
 
-const ui = {
-    toggle
+const showNotification = (payload: {status: string, title: string, message: string}): ShowNotificationAction => {
+    return {
+        type: SHOW_NOTIFICATION,
+        payload: payload
+    }
 }
 
-export type UiActionTypes = ToggleAction;
+const ui = {
+    toggle,
+    showNotification
+}
+
+export type UiActionTypes = ToggleAction | ShowNotificationAction;
 
 export default ui;

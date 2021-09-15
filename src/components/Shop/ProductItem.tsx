@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../UI/Card';
 import classes from './ProductItem.module.css';
 import {useDispatch} from 'react-redux';
-import {cart} from '../../store/cart/cart-slice';
+import {cart} from '../../store/cart/slice';
 
 const ProductItem: React.FC<{id: string, name: string, price: number, description: string}> = (props) => {
   const { id, name, price, description } = props;

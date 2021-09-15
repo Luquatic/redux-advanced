@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './CartItem.module.css';
 import {useDispatch} from "react-redux";
-import {cart} from "../../store/cart/cart-slice";
+import {cart} from "../../store/cart/slice";
 
 const CartItem: React.FC<{item: {id: string, name: string, quantity: number, total: number, price: number}}> = (props) => {
   const { id, name, quantity, total, price } = props.item;

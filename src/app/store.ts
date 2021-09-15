@@ -1,10 +1,10 @@
 import {createStore, combineReducers, ThunkAction, Action} from '@reduxjs/toolkit';
 import uiReducer from '../store/ui/reducer';
-import cartSlice from '../store/cart/cart-slice';
+import slice from '../store/cart/slice';
 
 const rootReducer = combineReducers({
     ui: uiReducer,
-    cart: cartSlice.reducer
+    cart: slice.reducer
 })
 
 const store = createStore(rootReducer);

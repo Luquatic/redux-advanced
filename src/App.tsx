@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from './app/store';
 import ui from "./store/ui/actions";
 import Notification from "./components/UI/Notification";
+import {fetchCartData} from "./store/cart/actions";
 
 let isInitial = true;
 
@@ -17,7 +18,11 @@ function App() {
     const dispatch = useDispatch();
     const showCart = useSelector((state: RootState) => state.ui.cartIsVisible);
     const cart = useSelector((state: RootState) => state.cart);
-    const notification = useSelector((state: RootState) => state.ui.notification)
+    const notification = useSelector((state: RootState) => state.ui.notification);
+
+    useEffect(() => {
+        dispatch(fetchCartData())
+    }, [dispatch]);
 
     useEffect(() => {
         const sendCartData = async () => {
@@ -42,18 +47,21 @@ function App() {
             }));
         }
 
-        if(isInitial) {
+        if (isInitial) {
             isInitial = false;
             return
         }
 
-        sendCartData().catch((error) => {
-            dispatch(ui.showNotification({
-                status: 'error',
-                title: 'Error',
-                message: 'Sending cart data failed!'
-            }));
-        })
+        if (cart.changed)  {
+            sendCartData().catch((error) => {
+                dispatch(ui.showNotification({
+                    status: 'error',
+                    title: 'Error',
+                    message: 'Sending cart data failed!'
+                }));
+            })
+        }
+
     }, [cart, dispatch]);
 
     return (
